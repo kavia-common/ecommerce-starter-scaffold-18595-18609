@@ -1,0 +1,18 @@
+<header class="nav">
+  <a class="brand" routerLink="/">
+    <span class="logo">Ocean</span>
+    <span class="brand-sub">Shop</span>
+  </a>
+
+  <nav class="links" aria-label="Primary">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/cart" routerLinkActive="active">Cart</a>
+    <a routerLink="/checkout" routerLinkActive="active">Checkout</a>
+  </nav>
+
+  <button class="cartBtn" type="button" (click)="openCart.emit()" aria-label="Open cart drawer">
+    <span class="cartIcon" aria-hidden="true">🛒</span>
+    <span class="cartLabel">Cart</span>
+    <span class="badge" *ngIf="itemCount() > 0">{{ itemCount() }}</span>
+  </button>
+</header>

@@ -1,3 +1,8 @@
-<div class="container">
-  <h1>{{ title }}</h1>
-</div>
+<app-top-nav (openCart)="openCart()"></app-top-nav>
+
+<main class="main">
+  <router-outlet></router-outlet>
+</main>
+
+<app-floating-cart (openCart)="openCart()"></app-floating-cart>
+<app-cart-drawer [open]="cartOpen()" (close)="closeCart()"></app-cart-drawer>

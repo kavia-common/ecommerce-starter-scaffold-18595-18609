@@ -1,0 +1,32 @@
+<section class="wrap">
+  <a class="back" routerLink="/">← Back to products</a>
+
+  <div class="state" *ngIf="state() === 'loading'">Loading product…</div>
+  <div class="error" *ngIf="state() === 'error'">{{ error() }}</div>
+
+  <ng-container *ngIf="state() === 'loaded' && product() as p">
+    <div class="card">
+      <div class="image" [style.backgroundImage]="p.image_url ? 'url(' + p.image_url + ')' : ''">
+        <div class="imageFallback" *ngIf="!p.image_url">📦</div>
+      </div>
+
+      <div class="body">
+        <div class="titleRow">
+          <h1 class="title">{{ p.name }}</h1>
+          <span class="pill" [class.warn]="p.quantity <= 5">{{ p.quantity }} in stock</span>
+        </div>
+
+        <div class="price">{{ price(p) }}</div>
+        <p class="desc">{{ p.description }}</p>
+
+        <div class="actions">
+          <button class="primary" type="button" (click)="add(p)" [disabled]="p.quantity <= 0">
+            Add to cart
+          </button>
+          <a class="secondary" routerLink="/cart">View cart</a>
+          <a class="ghost" routerLink="/checkout">Checkout</a>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</section>

@@ -1,0 +1,66 @@
+<div class="backdrop" [class.open]="open" (click)="onBackdropClick($event)" role="dialog" aria-modal="true">
+  <aside class="panel" [class.open]="open" aria-label="Cart drawer">
+    <header class="panelHeader">
+      <div>
+        <div class="title">Your Cart</div>
+        <div class="subtitle">Review items before checkout</div>
+      </div>
+
+      <button class="iconBtn" type="button" (click)="close.emit()" aria-label="Close cart">
+        ✕
+      </button>
+    </header>
+
+    <section class="content">
+      <div class="state" *ngIf="state() === 'loading'">Loading cart…</div>
+      <div class="error" *ngIf="error()">{{ error() }}</div>
+
+      <ng-container *ngIf="cart() as c">
+        <div class="empty" *ngIf="c.items.length === 0">
+          <div class="emptyTitle">Cart is empty</div>
+          <div class="emptyHint">Add items from the product catalog.</div>
+        </div>
+
+        <div class="items" *ngIf="c.items.length > 0">
+          <div class="item" *ngFor="let it of c.items">
+            <div class="thumb" [style.backgroundImage]="it.product?.image_url ? 'url(' + it.product?.image_url + ')' : ''">
+              <span *ngIf="!it.product?.image_url">📦</span>
+            </div>
+
+            <div class="meta">
+              <div class="name">{{ it.product?.name || ('Product #' + it.product_id) }}</div>
+              <div class="price">
+                {{ formatLine(it.unit_price_cents, 1, it.currency_code) }}
+                <span class="muted">each</span>
+              </div>
+
+              <div class="qtyRow">
+                <button class="qtyBtn" type="button" (click)="dec(it.product_id, it.quantity)" aria-label="Decrease quantity">−</button>
+                <div class="qty">{{ it.quantity }}</div>
+                <button class="qtyBtn" type="button" (click)="inc(it.product_id, it.quantity)" aria-label="Increase quantity">+</button>
+
+                <button class="removeBtn" type="button" (click)="remove(it.product_id)">Remove</button>
+              </div>
+            </div>
+
+            <div class="lineTotal">
+              {{ formatLine(it.unit_price_cents, it.quantity, it.currency_code) }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </section>
+
+    <footer class="panelFooter">
+      <div class="totals">
+        <span class="muted">Subtotal</span>
+        <span class="total">{{ subtotal() }}</span>
+      </div>
+
+      <div class="actions">
+        <a class="secondary" routerLink="/cart" (click)="close.emit()">View cart</a>
+        <a class="primary" routerLink="/checkout" (click)="close.emit()">Checkout</a>
+      </div>
+    </footer>
+  </aside>
+</div>

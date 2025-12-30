@@ -1,0 +1,253 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(2, 6, 23, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 140ms ease;
+}
+
+.backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.panel {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  height: calc(100% - 24px);
+  width: min(440px, calc(100% - 24px));
+
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(37, 99, 235, 0.14);
+  border-radius: 18px;
+
+  box-shadow: 0 22px 60px rgba(2, 6, 23, 0.28);
+  backdrop-filter: blur(12px);
+
+  transform: translateX(12px);
+  transition: transform 160ms ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel.open {
+  transform: translateX(0);
+}
+
+.panelHeader {
+  padding: 16px 16px 12px 16px;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid rgba(2, 6, 23, 0.08);
+}
+
+.title {
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin-top: 4px;
+  font-size: 13px;
+  color: rgba(15, 23, 42, 0.70);
+}
+
+.iconBtn {
+  border: 1px solid rgba(2, 6, 23, 0.12);
+  background: rgba(249, 250, 251, 0.8);
+  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.content {
+  padding: 12px 16px 16px 16px;
+  overflow: auto;
+  flex: 1;
+}
+
+.state {
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(37, 99, 235, 0.08);
+  color: rgba(15, 23, 42, 0.84);
+  font-weight: 600;
+}
+
+.error {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(239, 68, 68, 0.10);
+  color: #991b1b;
+  border: 1px solid rgba(239, 68, 68, 0.22);
+  font-weight: 700;
+}
+
+.empty {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px dashed rgba(2, 6, 23, 0.16);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.emptyTitle {
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.emptyHint {
+  margin-top: 6px;
+  color: rgba(15, 23, 42, 0.72);
+}
+
+.items {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(2, 6, 23, 0.08);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(37, 99, 235, 0.10);
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+.meta {
+  min-width: 0;
+}
+
+.name {
+  font-weight: 900;
+  color: #0f172a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.price {
+  margin-top: 2px;
+  color: rgba(15, 23, 42, 0.74);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.muted {
+  color: rgba(15, 23, 42, 0.62);
+  font-weight: 600;
+}
+
+.qtyRow {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qtyBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid rgba(2, 6, 23, 0.12);
+  background: rgba(249, 250, 251, 0.9);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.qty {
+  min-width: 34px;
+  text-align: center;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.removeBtn {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: rgba(239, 68, 68, 0.92);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.lineTotal {
+  font-weight: 900;
+  color: #0f172a;
+  align-self: center;
+}
+
+.panelFooter {
+  padding: 14px 16px 16px 16px;
+  border-top: 1px solid rgba(2, 6, 23, 0.08);
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.10), rgba(255, 255, 255, 0.0));
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+.totals {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(2, 6, 23, 0.08);
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.total {
+  font-weight: 1000;
+  color: #0f172a;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.actions a {
+  text-align: center;
+  text-decoration: none;
+  padding: 12px 12px;
+  border-radius: 14px;
+  font-weight: 900;
+}
+
+.secondary {
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  background: rgba(255, 255, 255, 0.85);
+  color: #0f172a;
+}
+
+.primary {
+  background: linear-gradient(180deg, rgba(245, 158, 11, 1), rgba(217, 119, 6, 1));
+  color: #111827;
+  border: 1px solid rgba(245, 158, 11, 0.28);
+}

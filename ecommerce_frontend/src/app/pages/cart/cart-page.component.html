@@ -1,0 +1,66 @@
+<section class="wrap">
+  <div class="header">
+    <div>
+      <h1>Cart</h1>
+      <p class="sub">Adjust quantities or proceed to checkout.</p>
+    </div>
+
+    <div class="headerActions">
+      <button class="ghost" type="button" (click)="clear()">Clear</button>
+      <a class="primary" routerLink="/checkout">Checkout</a>
+    </div>
+  </div>
+
+  <div class="state" *ngIf="state() === 'loading'">Loading cart…</div>
+  <div class="error" *ngIf="error()">{{ error() }}</div>
+
+  <ng-container *ngIf="cart() as c">
+    <div class="empty" *ngIf="c.items.length === 0">
+      <div class="emptyTitle">Your cart is empty</div>
+      <div class="emptyHint">Go back to the catalog to add products.</div>
+      <a class="secondary" routerLink="/">Browse products</a>
+    </div>
+
+    <div class="list" *ngIf="c.items.length > 0">
+      <div class="row" *ngFor="let it of c.items">
+        <div class="thumb" [style.backgroundImage]="it.product?.image_url ? 'url(' + it.product?.image_url + ')' : ''">
+          <span *ngIf="!it.product?.image_url">📦</span>
+        </div>
+
+        <div class="meta">
+          <div class="name">{{ it.product?.name || ('Product #' + it.product_id) }}</div>
+          <div class="unit">{{ lineTotal(it.unit_price_cents, 1, it.currency_code) }} <span class="muted">each</span></div>
+
+          <div class="qtyRow">
+            <button class="qtyBtn" type="button" (click)="dec(it.product_id, it.quantity)">−</button>
+            <div class="qty">{{ it.quantity }}</div>
+            <button class="qtyBtn" type="button" (click)="inc(it.product_id, it.quantity)">+</button>
+            <button class="removeBtn" type="button" (click)="remove(it.product_id)">Remove</button>
+          </div>
+        </div>
+
+        <div class="total">{{ lineTotal(it.unit_price_cents, it.quantity, it.currency_code) }}</div>
+      </div>
+    </div>
+
+    <div class="summary" *ngIf="c.items.length > 0">
+      <div class="sumRow">
+        <span class="muted">Subtotal</span>
+        <span class="sumValue">{{ subtotal() }}</span>
+      </div>
+      <div class="sumRow">
+        <span class="muted">Shipping</span>
+        <span class="sumValue">—</span>
+      </div>
+      <div class="sumRow">
+        <span class="muted">Tax</span>
+        <span class="sumValue">—</span>
+      </div>
+
+      <div class="sumActions">
+        <a class="secondary" routerLink="/">Continue shopping</a>
+        <a class="primary" routerLink="/checkout">Checkout</a>
+      </div>
+    </div>
+  </ng-container>
+</section>

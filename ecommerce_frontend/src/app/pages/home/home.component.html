@@ -1,0 +1,48 @@
+<section class="hero">
+  <div class="heroCard">
+    <div class="kicker">Ocean Professional</div>
+    <h1 class="title">Browse products. Add to cart. Checkout in minutes.</h1>
+    <p class="subtitle">
+      Clean, modern ecommerce starter with a streamlined cart + checkout flow.
+    </p>
+    <div class="heroActions">
+      <a class="primary" routerLink="/checkout">Go to checkout</a>
+      <a class="secondary" routerLink="/cart">View cart</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="sectionHeader">
+    <h2>Products</h2>
+    <button class="refresh" type="button" (click)="load()">Refresh</button>
+  </div>
+
+  <div class="state" *ngIf="state() === 'loading'">Loading products…</div>
+  <div class="error" *ngIf="state() === 'error'">{{ error() }}</div>
+
+  <div class="grid" *ngIf="state() === 'loaded'">
+    <article class="card" *ngFor="let p of products()">
+      <a class="image" [routerLink]="['/product', p.id]" [style.backgroundImage]="p.image_url ? 'url(' + p.image_url + ')' : ''">
+        <div class="imageFallback" *ngIf="!p.image_url">📦</div>
+      </a>
+
+      <div class="body">
+        <div class="nameRow">
+          <a class="name" [routerLink]="['/product', p.id]">{{ p.name }}</a>
+          <span class="pill" [class.warn]="p.quantity <= 5">{{ p.quantity }} in stock</span>
+        </div>
+
+        <div class="desc">{{ p.description }}</div>
+
+        <div class="bottom">
+          <div class="price">{{ price(p) }}</div>
+          <div class="actions">
+            <a class="ghost" [routerLink]="['/product', p.id]">Details</a>
+            <button class="add" type="button" (click)="add(p)" [disabled]="p.quantity <= 0">Add</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

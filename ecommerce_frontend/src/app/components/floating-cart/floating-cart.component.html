@@ -1,0 +1,4 @@
+<button class="fab" type="button" (click)="openCart.emit()" aria-label="Open cart">
+  <span class="icon" aria-hidden="true">🛒</span>
+  <span class="count" *ngIf="itemCount() > 0">{{ itemCount() }}</span>
+</button>

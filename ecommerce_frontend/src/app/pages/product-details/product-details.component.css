@@ -1,0 +1,146 @@
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 18px 18px 48px 18px;
+}
+
+.back {
+  display: inline-block;
+  margin: 6px 0 14px 0;
+  text-decoration: none;
+  font-weight: 900;
+  color: rgba(15, 23, 42, 0.78);
+}
+
+.state {
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.12);
+  font-weight: 700;
+  color: rgba(15, 23, 42, 0.82);
+}
+
+.error {
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(239, 68, 68, 0.10);
+  border: 1px solid rgba(239, 68, 68, 0.20);
+  font-weight: 800;
+  color: #991b1b;
+}
+
+.card {
+  border-radius: 22px;
+  border: 1px solid rgba(2, 6, 23, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 24px 70px rgba(2, 6, 23, 0.10);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 860px) {
+  .card {
+    grid-template-columns: 420px 1fr;
+  }
+}
+
+.image {
+  min-height: 320px;
+  background: rgba(37, 99, 235, 0.10);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.imageFallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+}
+
+.body {
+  padding: 18px 18px 20px 18px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #0f172a;
+}
+
+.pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  background: rgba(37, 99, 235, 0.10);
+  border: 1px solid rgba(37, 99, 235, 0.16);
+  color: rgba(15, 23, 42, 0.86);
+  white-space: nowrap;
+}
+
+.pill.warn {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: rgba(245, 158, 11, 0.30);
+}
+
+.price {
+  margin-top: 10px;
+  font-weight: 1000;
+  font-size: 18px;
+  color: #0f172a;
+}
+
+.desc {
+  margin-top: 10px;
+  color: rgba(15, 23, 42, 0.72);
+  line-height: 1.45;
+  max-width: 75ch;
+}
+
+.actions {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.actions a,
+.actions button {
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-weight: 1000;
+  border: 1px solid rgba(2, 6, 23, 0.10);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primary {
+  background: linear-gradient(180deg, rgba(245, 158, 11, 1), rgba(217, 119, 6, 1));
+  color: #111827;
+  border-color: rgba(245, 158, 11, 0.30);
+}
+
+.secondary {
+  background: rgba(255, 255, 255, 0.86);
+  color: #0f172a;
+  border-color: rgba(37, 99, 235, 0.14);
+}
+
+.ghost {
+  background: rgba(37, 99, 235, 0.08);
+  color: #0f172a;
+  border-color: rgba(37, 99, 235, 0.14);
+}

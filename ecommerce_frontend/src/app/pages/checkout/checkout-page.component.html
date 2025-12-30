@@ -1,0 +1,136 @@
+<section class="wrap">
+  <div class="header">
+    <div>
+      <h1>Checkout</h1>
+      <p class="sub">Mock address & payment form. Submits to backend checkout endpoint.</p>
+    </div>
+    <a class="ghost" routerLink="/cart">Back to cart</a>
+  </div>
+
+  <div class="state" *ngIf="cartState() === 'loading'">Loading cart…</div>
+  <div class="error" *ngIf="cartError()">{{ cartError() }}</div>
+
+  <ng-container *ngIf="state() !== 'success'">
+    <div class="grid">
+      <form class="card" (ngSubmit)="submit()">
+        <h2>Shipping</h2>
+
+        <div class="row">
+          <label>
+            Full name
+            <input name="name" [(ngModel)]="name" placeholder="Jane Doe" required />
+          </label>
+          <label>
+            Email
+            <input name="email" [(ngModel)]="email" placeholder="jane@example.com" required />
+          </label>
+        </div>
+
+        <label>
+          Address
+          <input name="address1" [(ngModel)]="address1" placeholder="123 Ocean Ave" required />
+        </label>
+
+        <div class="row">
+          <label>
+            City
+            <input name="city" [(ngModel)]="city" placeholder="San Diego" required />
+          </label>
+          <label>
+            Postal code
+            <input name="postal" [(ngModel)]="postal" placeholder="92101" required />
+          </label>
+        </div>
+
+        <h2>Payment (mock)</h2>
+
+        <label>
+          Card number
+          <input name="cardNumber" [(ngModel)]="cardNumber" placeholder="4242 4242 4242 4242" required />
+        </label>
+
+        <div class="row">
+          <label>
+            Expiry
+            <input name="expiry" [(ngModel)]="expiry" placeholder="12/34" required />
+          </label>
+          <label>
+            CVC
+            <input name="cvc" [(ngModel)]="cvc" placeholder="123" required />
+          </label>
+        </div>
+
+        <div class="submitRow">
+          <div class="submitInfo">
+            <div class="muted">Subtotal</div>
+            <div class="sum">{{ subtotal() }}</div>
+          </div>
+
+          <button class="primary" type="submit" [disabled]="state() === 'submitting'">
+            {{ state() === 'submitting' ? 'Placing order…' : 'Place order' }}
+          </button>
+        </div>
+
+        <div class="error" *ngIf="state() === 'error' && error()">{{ error() }}</div>
+      </form>
+
+      <aside class="card summary" *ngIf="cart() as c">
+        <h2>Order summary</h2>
+
+        <div class="summaryRow" *ngFor="let it of c.items">
+          <div class="left">
+            <div class="name">{{ it.product?.name || ('Product #' + it.product_id) }}</div>
+            <div class="muted">Qty {{ it.quantity }}</div>
+          </div>
+          <div class="right">
+            {{ (it.unit_price_cents * it.quantity) / 100 | number:'1.2-2' }} {{ it.currency_code }}
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="totalRow">
+          <span class="muted">Subtotal</span>
+          <span class="sum">{{ subtotal() }}</span>
+        </div>
+        <div class="totalRow">
+          <span class="muted">Shipping</span>
+          <span class="sum">0.00</span>
+        </div>
+        <div class="totalRow">
+          <span class="muted">Tax</span>
+          <span class="sum">0.00</span>
+        </div>
+      </aside>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="state() === 'success' && order() as o">
+    <div class="confirm">
+      <div class="badge">Order confirmed</div>
+      <h2>Thanks! Your order #{{ o.id }} is placed.</h2>
+      <p class="sub">
+        This is a demo confirmation view. Backend created an order and returned its items.
+      </p>
+
+      <div class="confirmCard">
+        <div class="confirmRow" *ngFor="let it of o.items">
+          <div>
+            <div class="name">{{ it.product_name }}</div>
+            <div class="muted">Qty {{ it.quantity }}</div>
+          </div>
+          <div class="sum">{{ (it.line_total_cents / 100) | number:'1.2-2' }} {{ it.currency_code }}</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="totalRow">
+          <span class="muted">Total</span>
+          <span class="sum">{{ (o.total_cents / 100) | number:'1.2-2' }} {{ o.currency_code }}</span>
+        </div>
+      </div>
+
+      <button class="primary" type="button" (click)="backToHome()">Back to home</button>
+    </div>
+  </ng-container>
+</section>
